@@ -7,11 +7,13 @@ const dbConfig = require('../config/database');
 const Aircraft = require('../models/Aircraft');
 const AircraftModel = require('../models/AircraftModel');
 const Manufacturer = require('../models/Manufacturer');
+const User = require('../models/User');
 
 const connection = new Sequelize(dbConfig);
 
 Aircraft.init(connection);
 AircraftModel.init(connection);
 Manufacturer.init(connection);
+User.init(connection);
 
 module.exports = connection;
