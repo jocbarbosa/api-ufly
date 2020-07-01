@@ -56,7 +56,7 @@ module.exports = {
         });
 
         if (user) {
-            res.json({
+            return res.json({
                 message: 'User updated',
                 status: 'success'
             });
