@@ -48,8 +48,8 @@ module.exports = {
         }
     },
     async update(req, res) {
-        const { name, email, password, birthday, active } = req.body;
-        const user = await User.update({ name, email, password, birthday, active }, {
+        const { name, email, password, birthday, is_active } = req.body;
+        const user = await User.update({ name, email, password, birthday, is_active }, {
             where: {
                 id: req.params.userId
             }

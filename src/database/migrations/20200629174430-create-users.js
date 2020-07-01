@@ -26,7 +26,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
-      active: {
+      is_active: {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: 'Y'

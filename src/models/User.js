@@ -6,7 +6,8 @@ class User extends Model {
             name: DataTypes.STRING,
             email: DataTypes.STRING,
             password: DataTypes.STRING,
-            birthday: DataTypes.DATE
+            birthday: DataTypes.DATE,
+            is_active: DataTypes.STRING
         }, {
             sequelize: connection,
             tableName: 'users'
