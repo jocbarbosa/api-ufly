@@ -31,6 +31,18 @@ module.exports = {
         allowNull: false,
         defaultValue: 'Y'
       },
+      passport: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      passport_emitter: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      passport_shelf_life: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false
@@ -38,6 +50,16 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false
+      },
+      country_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'countries',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
       }
     });
   },
