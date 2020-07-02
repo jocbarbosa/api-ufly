@@ -43,7 +43,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         references: {
-          model: 'aircraft_manufacturers',
+          model: 'manufacturers',
           key: 'id',
         },
       }
