@@ -13,25 +13,29 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      passengers: {
+      passengers_capacity: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      autonomy_km: {
-        type: Sequelize.STRING,
-        allowNull: true
+      autonomy: {
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       description: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      speed_km: {
-        type: Sequelize.INTEGER,
-        allowNull: true
+      speed: {
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
-      img: {
-        type: Sequelize.TEXT,
-        allowNull: true
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
       },
       manufacturer_id: {
         type: Sequelize.INTEGER,
@@ -42,14 +46,6 @@ module.exports = {
           model: 'aircraft_manufacturers',
           key: 'id',
         },
-      },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false
       }
     });
   },
