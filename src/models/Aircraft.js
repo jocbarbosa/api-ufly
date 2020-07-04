@@ -13,7 +13,7 @@ class Aircraft extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Onwer, {
+        this.belongsTo(models.Owner, {
             foreignKey: 'owner_id',
             as: 'owner_fk'
         });
