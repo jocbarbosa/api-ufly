@@ -33,3 +33,5 @@ class Flight extends Model {
         });
     }
 }
+
+module.exports = Flight;
