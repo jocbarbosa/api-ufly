@@ -7,7 +7,7 @@ class Manufacturer extends Model {
             description: DataTypes.STRING,
         }, {
             sequelize: connection,
-            tableName: 'aircrafts_manufacturers'
+            tableName: 'manufacturers'
         })
     }
 }

@@ -15,12 +15,10 @@ const connection = new Sequelize(dbConfig);
 
 Country.init(connection);
 City.init(connection);
-
 City.associate(connection.models);
-
-Aircraft.init(connection);
-AircraftModel.init(connection);
 Manufacturer.init(connection);
+AircraftModel.init(connection);
+Aircraft.init(connection);
 User.init(connection);
 
 module.exports = connection;

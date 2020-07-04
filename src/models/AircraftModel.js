@@ -4,16 +4,15 @@ class AircraftModel extends Model {
     static init(connection) {
         super.init({
             name: DataTypes.STRING,
-            passengers: DataTypes.INTEGER,
-            autonomy_km: DataTypes.INTEGER,
+            passengers_capacity: DataTypes.INTEGER,
+            autonomy: DataTypes.FLOAT,
             description: DataTypes.STRING,
-            speed_km: DataTypes.INTEGER,
-            img: DataTypes.TEXT,
+            speed: DataTypes.FLOAT,
             manufacturer_id: {
                 type: DataTypes.INTEGER,
                 references: {
                     key: 'id',
-                    model: 'Manufacturer'
+                    model: 'manufacturers'
                 }
             }
         }, {
