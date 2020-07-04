@@ -42,6 +42,7 @@ module.exports = {
       },
       aircraft_model_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'aircraft_models',
           key: 'id'

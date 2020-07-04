@@ -27,10 +27,21 @@ module.exports = {
         allowNull: false
       },
       rating: Sequelize.INTEGER,
+
       description: Sequelize.STRING,
+
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
 
       user_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'users',
           key: 'id'
@@ -40,6 +51,7 @@ module.exports = {
       },
       aircraft_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'aircrafts',
           key: 'id'
@@ -49,6 +61,7 @@ module.exports = {
       },
       city_id_from: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'cities',
           key: 'id',
@@ -58,6 +71,7 @@ module.exports = {
       },
       city_id_to: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'cities',
           key: 'id'
