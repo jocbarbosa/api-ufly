@@ -35,6 +35,15 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
+      },
+      aircraft_model_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'aircraft_models',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
       }
 
     });
