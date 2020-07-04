@@ -7,17 +7,17 @@ class AircraftModel extends Model {
             passengers_capacity: DataTypes.INTEGER,
             autonomy: DataTypes.FLOAT,
             description: DataTypes.STRING,
-            speed: DataTypes.FLOAT,
-            manufacturer_id: {
-                type: DataTypes.INTEGER,
-                references: {
-                    key: 'id',
-                    model: 'manufacturers'
-                }
-            }
+            speed: DataTypes.FLOAT
         }, {
             sequelize: connection,
             tableName: 'aircraft_models'
+        });
+    }
+
+    static associate(models) {
+        this.belongsTo(models.Manufacturer, {
+            foreignKey: 'manufacturer_id',
+            as: 'manufacturer_fk'
         })
     }
 }
