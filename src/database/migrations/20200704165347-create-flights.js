@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true
       },
       status: {
-        type: Sequelize.STRING, // pending, done, canceled, flight
+        type: Sequelize.STRING,
         allowNull: true,
         defaultValue: 'pending',
       },
@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false
       },
       datetime: {
-        type: Sequelize.DATETIME,
+        type: Sequelize.DATE,
         allowNull: false
       },
       rating: Sequelize.INTEGER,
