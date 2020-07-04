@@ -11,7 +11,6 @@ class User extends Model {
             passport: DataTypes.STRING,
             passport_emitter: DataTypes.STRING,
             passport_shelf_life: DataTypes.STRING
-
         }, {
             sequelize: connection,
             tableName: 'users'

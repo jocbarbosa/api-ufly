@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false
       },
       birthday: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
       },
       is_active: {
