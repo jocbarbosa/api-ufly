@@ -16,6 +16,7 @@ routes.get('/countries', CountryController.index);
 routes.get('/countries/:countryId', CountryController.show);
 routes.post('/countries', CountryController.store);
 routes.delete('/countries/:countryId', CountryController.destroy);
+routes.put('/countries/:countryId', CountryController.update);
 
 // User routes
 routes.get('/users', UserController.index);

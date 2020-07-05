@@ -38,10 +38,18 @@ module.exports = {
     },
 
     async store(req, res) {
-        const { name, flag_image, image, is_active, nationality } = req.body;
+        const { name, is_active, nationality } = req.body;
+
+        const flag_image = req.files.flag_image;
+        const image = req.files.image;
+        const flagImageName = `${name}_flag`;
+        const imageName = `${name}_image`;
+
+        flag_image.mv(`uploads/countries/${flagImageName}.jpg`);
+        flag_image.mv(`uploads/countries/${imageName}.jpg`);
 
         try {
-            const country = await Country.create({ name, flag_image, image, is_active, nationality });
+            const country = await Country.create({ name, flag_image: flagImageName, image: imageName, is_active, nationality });
 
             return res.json({
                 status: 'success',
@@ -52,8 +60,36 @@ module.exports = {
             return res.status(500).json({
                 status: 'error',
                 message: err
-            })
+            });
         }
+    },
+
+    async update(req, res) {
+        const findCountry = await Country.findByPk(req.params.countryId);
+        if (!findCountry) {
+            return res.status(404).json({
+                status: 'not found',
+                message: 'Country not found'
+            });
+        }
+
+        const { name, flag_image, image, is_active, nationality } = req.body;
+
+        findCountry.update({
+            name, flag_image, image, is_active, nationality
+        })
+            .then(result => {
+                return res.json({
+                    status: 'success',
+                    message: 'Country updated'
+                });
+            })
+            .catch(err => {
+                return res.status(500).json({
+                    status: 'error',
+                    message: err
+                })
+            })
     },
 
     async destroy(req, res) {
