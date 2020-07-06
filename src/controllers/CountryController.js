@@ -1,4 +1,5 @@
 const Country = require('../models/Country');
+const fs = require('fs');
 
 module.exports = {
     async index(req, res) {
@@ -42,11 +43,11 @@ module.exports = {
 
         const flag_image = req.files.flag_image;
         const image = req.files.image;
-        const flagImageName = `${name}_flag`;
-        const imageName = `${name}_image`;
+        const flagImageName = `${name}_flag.jpg`;
+        const imageName = `${name}_image.jpg`;
 
-        flag_image.mv(`uploads/countries/${flagImageName}.jpg`);
-        flag_image.mv(`uploads/countries/${imageName}.jpg`);
+        flag_image.mv(`uploads/countries/${flagImageName}`);
+        flag_image.mv(`uploads/countries/${imageName}`);
 
         try {
             const country = await Country.create({ name, flag_image: flagImageName, image: imageName, is_active, nationality });
@@ -96,12 +97,30 @@ module.exports = {
         const findCountry = await Country.findByPk(req.params.countryId);
 
         if (findCountry) {
-            findCountry.destroy();
 
-            return res.json({
-                status: 'success',
-                message: `Country ${req.params.countryId} deleted`
-            });
+            try {
+                fs.unlink(`uploads/countries/${findCountry.image}`, (err) => {
+                    if (err) {
+                        return res.json({ status: 'error', message: 'Error on deleting image' });
+                    }
+                });
+                fs.unlink(`uploads/countries/${findCountry.flag_image}`, (err) => {
+                    if (err) {
+                        return res.json({ status: 'error', message: 'Error on deleting image' });
+                    }
+                });
+
+                findCountry.destroy();
+
+                return res.json({
+                    status: 'success',
+                    message: `Country ID: ${req.params.countryId} deleted`
+                });
+            } catch (err) {
+                res.json(err);
+            }
+
+
         }
         return res.status(404).json({
             status: 'not found',
