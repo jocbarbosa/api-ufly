@@ -115,6 +115,8 @@ module.exports = {
         if (findCountry) {
 
             try {
+                findCountry.destroy();
+
                 fs.unlink(`uploads/countries/${findCountry.image}`, (err) => {
                     if (err) {
                         return res.json({ status: 'error', message: 'Error on deleting image' });
@@ -125,8 +127,6 @@ module.exports = {
                         return res.json({ status: 'error', message: 'Error on deleting image' });
                     }
                 });
-
-                findCountry.destroy();
 
                 return res.json({
                     status: 'success',
