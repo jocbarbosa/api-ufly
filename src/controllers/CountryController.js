@@ -32,7 +32,7 @@ module.exports = {
         if (!country) {
             return res.status(404).json({
                 status: 'not found',
-                message: 'No country found'
+                message: 'No country found for this Id'
             });
         }
         return res.json(country);
@@ -43,11 +43,11 @@ module.exports = {
 
         const flag_image = req.files.flag_image;
         const image = req.files.image;
-        const flagImageName = `${name}_flag.jpg`;
-        const imageName = `${name}_image.jpg`;
+        const flagImageName = `${name}-flag.jpg`;
+        const imageName = `${name}-image.jpg`;
 
         flag_image.mv(`uploads/countries/${flagImageName}`);
-        flag_image.mv(`uploads/countries/${imageName}`);
+        image.mv(`uploads/countries/${imageName}`);
 
         try {
             const country = await Country.create({ name, flag_image: flagImageName, image: imageName, is_active, nationality });
@@ -70,14 +70,30 @@ module.exports = {
         if (!findCountry) {
             return res.status(404).json({
                 status: 'not found',
-                message: 'Country not found'
+                message: 'Country not found for this Id'
             });
         }
 
-        const { name, flag_image, image, is_active, nationality } = req.body;
+        const { name, is_active, nationality } = req.body;
+
+        fs.unlink(`uploads/countries/${findCountry.flag_image}`, (err) => {
+            if (err) {
+                return res.json({ message: err })
+            }
+        });
+        const flagImageName = `${name}-flag.jpg`;
+        req.files.flag_image.mv(`uploads/countries/${flagImageName}`);
+
+        fs.unlink(`uploads/countries/${findCountry.image}`, (err) => {
+            if (err) {
+                return res.json({ message: err })
+            }
+        });
+        const imageName = `${name}-image.jpg`;
+        req.files.image.mv(`uploads/countries/${imageName}`);
 
         findCountry.update({
-            name, flag_image, image, is_active, nationality
+            name, flag_image: flagImageName, image: imageName, is_active, nationality
         })
             .then(result => {
                 return res.json({
