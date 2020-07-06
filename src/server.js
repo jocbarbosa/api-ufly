@@ -16,6 +16,6 @@ app.use(express.json());
 app.use('/countries', routes.countries);
 app.use('/users', routes.users);
 app.use('/manufacturers', routes.manufacturers);
-
+app.use('/cities', routes.cities);
 
 app.listen(process.env.PORT || 3000);
