@@ -11,7 +11,6 @@ module.exports = {
             });
         }
         return res.status(404).json({
-            count: 0,
             message: 'No users found'
         });
     },
