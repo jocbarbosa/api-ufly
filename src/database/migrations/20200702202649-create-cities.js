@@ -22,14 +22,6 @@ module.exports = {
         allowNull: false,
         defaultValue: 'Y'
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
       country_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -39,6 +31,14 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
       }
     });
   },
