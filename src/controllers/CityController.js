@@ -65,7 +65,7 @@ module.exports = {
             .then(result => {
                 return res.json({
                     status: 'success',
-                    message: 'Country updated'
+                    message: 'City updated'
                 });
             })
             .catch(err => {
