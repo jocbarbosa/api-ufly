@@ -5,7 +5,8 @@ class Aircraft extends Model {
         super.init({
             name: DataTypes.STRING,
             image: DataTypes.STRING,
-            is_active: DataTypes.CHAR(1)
+            is_active: DataTypes.CHAR(1),
+            registration: DataTypes.STRING()
         }, {
             sequelize: connection,
             tableName: 'aircrafts'
