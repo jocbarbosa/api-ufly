@@ -1,7 +1,6 @@
 const City = require('../models/City');
 const Country = require('../models/Country');
 const fs = require('fs');
-const { destroy } = require('../models/City');
 
 module.exports = {
     async index(req, res) {
