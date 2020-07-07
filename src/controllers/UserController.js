@@ -1,4 +1,6 @@
 const User = require('../models/User');
+const { Op } = require("sequelize");
+const bcrypt = require('bcrypt');
 
 module.exports = {
     async index(req, res) {
@@ -28,30 +30,48 @@ module.exports = {
 
     },
 
-    async store(req, res) {
-        const { name, email, password, birthday, country_id } = req.body;
-        try {
-            const user = await User.create({
-                name, email, password, birthday, country_id
-            });
+    async login(req, res) {
 
-            return res.status(201).json({
-                message: 'User created',
-                request: 'POST',
-                user
-            });
-        } catch (err) {
-            res.status(500).json({
-                message: 'Error during user creation',
-                request: 'POST',
-                error: err
-            })
+    },
+
+    async signup(req, res) {
+
+        const userExists = await User.findAll({ where: { email: req.body.email } });
+
+        if (userExists.length > 0) {
+            return res.json({ status: 'error', message: 'Email already registered' });
         }
+
+        const { name, email, password, birthday, country_id } = req.body;
+        const hash = bcrypt.hash(req.body.password, 10, async (err, hash) => {
+            if (err) {
+                return res.status(500).json({ err });
+            }
+
+            try {
+                const user = await User.create({
+                    name, email, password: hash, birthday, country_id
+                });
+
+                return res.status(201).json({
+                    message: 'User created',
+                    request: 'POST',
+                    user
+                });
+            } catch (err) {
+                res.status(500).json({
+                    message: 'Error during user creation',
+                    request: 'POST',
+                    error: err
+                })
+            }
+        });
     },
 
     async update(req, res) {
-        const { name, email, password, birthday, is_active, country_id } = req.body;
-        const user = await User.update({ name, email, password, birthday, is_active, country_id }, {
+        const { name, email, password, birthday, is_active, country_id, passport, passport_emitter, passport_shelf_life } = req.body;
+
+        const user = await User.update({ name, email, password, birthday, is_active, country_id, passport, passport_emitter, passport_shelf_life }, {
             where: {
                 id: req.params.userId
             }
