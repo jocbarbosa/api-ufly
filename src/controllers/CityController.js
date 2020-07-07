@@ -32,7 +32,7 @@ module.exports = {
                 name, is_active, country_id, image: cityImage.name
             });
 
-            return res.json({
+            return res.status(201).json({
                 status: 'success',
                 message: 'City created',
                 city

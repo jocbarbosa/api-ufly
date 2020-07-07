@@ -36,7 +36,7 @@ module.exports = {
         try {
             const manufacturer = await Manufacturer.create({ name, description });
 
-            return res.json({
+            return res.status(201).json({
                 status: 'success',
                 message: 'Manufacturer created',
                 manufacturer

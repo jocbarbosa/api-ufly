@@ -5,7 +5,7 @@ module.exports = {
         const users = await User.findAll();
 
         if (users.length > 0) {
-            return res.json({
+            return res.status(201).json({
                 count: users.length,
                 users
             });
@@ -14,6 +14,7 @@ module.exports = {
             message: 'No users found'
         });
     },
+
     async show(req, res) {
         const user = await User.findByPk(req.params.userId);
 
@@ -26,11 +27,12 @@ module.exports = {
         });
 
     },
+
     async store(req, res) {
-        const { name, email, password, birthday } = req.body;
+        const { name, email, password, birthday, country_id } = req.body;
         try {
             const user = await User.create({
-                name, email, password, birthday
+                name, email, password, birthday, country_id
             });
 
             return res.status(201).json({
@@ -46,9 +48,10 @@ module.exports = {
             })
         }
     },
+
     async update(req, res) {
-        const { name, email, password, birthday, is_active } = req.body;
-        const user = await User.update({ name, email, password, birthday, is_active }, {
+        const { name, email, password, birthday, is_active, country_id } = req.body;
+        const user = await User.update({ name, email, password, birthday, is_active, country_id }, {
             where: {
                 id: req.params.userId
             }

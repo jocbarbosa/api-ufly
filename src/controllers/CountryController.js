@@ -52,7 +52,7 @@ module.exports = {
         try {
             const country = await Country.create({ name, flag_image: flagImageName, image: imageName, is_active, nationality });
 
-            return res.json({
+            return res.status(201).json({
                 status: 'success',
                 message: 'Country created',
                 country
