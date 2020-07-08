@@ -31,6 +31,21 @@ module.exports = {
     },
 
     async login(req, res) {
+        const { email, password } = req.body;
+
+        const userExists = await User.findOne({ where: { email } });
+
+        if (!userExists) {
+            return res.status(500).json({ status: 'error', message: 'Login failed, check your credentials' });
+        };
+
+        bcrypt.compare(password, userExists.password, (error, response) => {
+            if (response) {
+                return res.json({ status: 'authorized', message: 'logged' });
+            }
+
+            return res.status(401).json({ status: 'unauthorized', message: error });
+        })
 
     },
 

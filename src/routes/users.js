@@ -5,8 +5,8 @@ const UserController = require('../controllers/UserController');
 
 routes.get('/', UserController.index);
 routes.get('/:userId', UserController.show);
-routes.post('/', UserController.signup);
-routes.post('/', UserController.login);
+routes.post('/signup', UserController.signup);
+routes.post('/login', UserController.login);
 routes.put('/:userId', UserController.update);
 routes.delete('/:userId', UserController.destroy);
 
