@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     async index(req, res) {
@@ -41,7 +42,18 @@ module.exports = {
 
         bcrypt.compare(password, userExists.password, (error, response) => {
             if (response) {
-                return res.json({ status: 'authorized', message: 'logged' });
+
+                const token = jwt.sign({
+                    email: userExists.email,
+                    userId: userExists.id
+                },
+                    process.env.JWT_SECRET,
+                    {
+                        expiresIn: "1h"
+                    }
+                );
+
+                return res.json({ status: 'authorized', message: 'Auth successful', token });
             }
 
             return res.status(401).json({ status: 'unauthorized', message: error });
