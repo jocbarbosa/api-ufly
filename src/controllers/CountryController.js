@@ -27,7 +27,11 @@ module.exports = {
     },
 
     async show(req, res) {
-        const country = await Country.findByPk(req.params.countryId);
+        const country = await Country.findByPk(req.params.countryId, {
+            include: {
+                association: 'cities'
+            }
+        });
 
         if (!country) {
             return res.status(404).json({

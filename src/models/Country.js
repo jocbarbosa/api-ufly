@@ -13,6 +13,13 @@ class Country extends Model {
             tableName: 'countries'
         })
     }
+
+    static associate(models) {
+        this.hasMany(models.City, {
+            foreignKey: 'country_id',
+            as: 'cities'
+        });
+    }
 }
 
 module.exports = Country;
