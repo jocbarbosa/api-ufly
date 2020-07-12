@@ -29,16 +29,6 @@ module.exports = {
       rating: Sequelize.INTEGER,
 
       description: Sequelize.STRING,
-
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -88,8 +78,15 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
-      }
-
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
     });
   },
 
