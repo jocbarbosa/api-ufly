@@ -31,6 +31,10 @@ class Flight extends Model {
             foreignKey: 'city_id_to',
             as: 'city_to_fk'
         });
+        this.belongsTo(models.Pilot, {
+            foreignKey: 'pilot_id',
+            as: 'pilot_id_fk'
+        })
     }
 }
 

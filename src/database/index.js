@@ -15,6 +15,7 @@ requiredModels.Owner.init(connection);
 requiredModels.Aircraft.init(connection);
 requiredModels.User.init(connection);
 requiredModels.Flight.init(connection);
+requiredModels.Pilot.init(connection);
 
 requiredModels.Country.associate(connection.models);
 requiredModels.City.associate(connection.models);

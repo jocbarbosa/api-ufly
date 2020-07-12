@@ -59,6 +59,16 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },
+      pilot_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'pilots',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
+      },
       city_id_from: {
         type: Sequelize.INTEGER,
         allowNull: false,
