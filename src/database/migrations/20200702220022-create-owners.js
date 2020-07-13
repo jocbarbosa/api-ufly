@@ -31,8 +31,7 @@ module.exports = {
         defaultValue: 'Y'
       },
       rating: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+        type: Sequelize.INTEGER
       },
       image: {
         type: Sequelize.STRING,

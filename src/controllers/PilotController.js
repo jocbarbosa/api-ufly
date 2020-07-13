@@ -32,7 +32,7 @@ module.exports = {
                     return res.status(201).json({
                         status: 'success',
                         message: 'Pilot created',
-                        pilot
+                        pilot: result
                     });
                 })
                 .catch(err => {
