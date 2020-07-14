@@ -27,21 +27,12 @@ module.exports = {
         const { name, birthday, registration, owner_id } = req.body;
 
         try {
-            const pilot = Pilot.create({ name, birthday, registration })
-                .then(result => {
-                    return res.status(201).json({
-                        status: 'success',
-                        message: 'Pilot created',
-                        pilot: result
-                    });
-                })
-                .catch(err => {
-                    return res.status(500).json({
-                        status: 'error',
-                        message: err.message
-                    });
-                });
-
+            const pilot = Pilot.create({ name, birthday, registration });
+            return res.status(201).json({
+                status: 'success',
+                message: 'Pilot created',
+                pilot: result
+            });
         } catch (err) {
             return res.status(500).json({ status: 'error', message: err });
         }

@@ -59,18 +59,12 @@ module.exports = {
         const cityImage = `${name}.jpg`;
         req.files.image.mv(`uploads/cities/${cityImage}`);
 
-        city.update({
-            name, country_id, image: cityImage
-        })
-            .then(result => {
-                return res.json({
-                    status: 'success',
-                    message: 'City updated'
-                });
-            })
-            .catch(err => {
-                return res.status(500).json({ status: 'error', message: err });
-            });
+        try {
+            city.update({ name, country_id, image: cityImage });
+            return res.json({ status: 'success', message: 'City updated' });
+        } catch (err) {
+            return res.status(500).json({ status: 'error', message: err });
+        }
     },
 
     async destroy(req, res) {

@@ -96,21 +96,14 @@ module.exports = {
         const imageName = `${name}-image.jpg`;
         req.files.image.mv(`uploads/countries/${imageName}`);
 
-        findCountry.update({
-            name, flag_image: flagImageName, image: imageName, is_active, nationality
-        })
-            .then(result => {
-                return res.json({
-                    status: 'success',
-                    message: 'Country updated'
-                });
-            })
-            .catch(err => {
-                return res.status(500).json({
-                    status: 'error',
-                    message: err
-                })
-            })
+        try {
+            findCountry.update({ name, flag_image: flagImageName, image: imageName, is_active, nationality });
+
+            return res.json({ status: 'success', message: 'Country updated' });
+        } catch (err) {
+            return res.status(500).json({ status: 'error', message: err });
+        }
+
     },
 
     async destroy(req, res) {

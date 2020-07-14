@@ -36,17 +36,13 @@ module.exports = {
         try {
             image.mv(`${pathImage}/${imageName}`);
 
-            const owner = await Owner.create({ name, email, password, type, image: imageName })
-                .then(result => {
-                    res.json({
-                        status: 'success',
-                        message: 'Owner created',
-                        owner: result
-                    });
-                })
-                .catch(err => {
-                    return res.status(500).json({ status: 'error', message: err.message });
-                })
+            const owner = await Owner.create({ name, email, password, type, image: imageName });
+
+            res.status(201).json({
+                status: 'success',
+                message: 'Owner created',
+                owner: result
+            });
         } catch (err) {
             return res.status(500).json({ status: 'error', message: err.message })
         }
@@ -56,6 +52,7 @@ module.exports = {
         const owner = await Owner.findByPk(req.params.ownerId);
 
         if (owner) {
+            const { name, email, password, type } = req.body;
             const pathImage = path.join(__dirname, '..', '..', 'uploads', 'owners', owner.image);
             fs.unlink(pathImage, (err) => {
                 if (err) {
@@ -66,15 +63,12 @@ module.exports = {
             const pathSaveImage = path.join(__dirname, '..', '..', 'uploads', 'owners', imageName);
             req.files.image.mv(pathSaveImage);
 
-            const { name, email, password, type } = req.body;
-
-            owner.update({ name, email, password, type, image: imageName })
-                .then(result => {
-                    return res.json({ status: 'success', message: 'Owner updated' });
-                })
-                .catch(err => {
-                    return res.status(500).json({ status: 'error', message: err });
-                });
+            try {
+                owner.update({ name, email, password, type, image: imageName });
+                return res.json({ status: 'success', message: 'Owner updated' });
+            } catch (err) {
+                return res.status(500).json({ status: 'error', message: err });
+            }
         }
 
         return res.status(404).json({ status: 'not found', message: 'Owner not found' });
