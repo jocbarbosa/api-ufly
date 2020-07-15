@@ -19,5 +19,6 @@ app.use('/manufacturers', routes.manufacturers);
 app.use('/cities', routes.cities);
 app.use('/pilots', routes.pilots);
 app.use('/owners', routes.owners);
+app.use('/models', routes.aircraftmodels);
 
 app.listen(process.env.PORT || 3000);
