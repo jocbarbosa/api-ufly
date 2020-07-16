@@ -34,7 +34,7 @@ module.exports = {
                 pilot: result
             });
         } catch (err) {
-            return res.status(500).json({ status: 'error', message: err });
+            return res.status(500).json({ status: 'error', message: err.message });
         }
     },
 
