@@ -21,6 +21,7 @@
     "sequelize": "^6.2.3"
   },
   "devDependencies": {
+    "git-commit-msg-linter": "^2.4.4",
     "nodemon": "^2.0.4",
     "sequelize-cli": "^6.1.0"
   }
