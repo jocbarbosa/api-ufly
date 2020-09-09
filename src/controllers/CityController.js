@@ -15,6 +15,17 @@ module.exports = {
         return res.status(404).json({ status: 'not found', message: 'No cities found' });
     },
 
+    async show(req, res) {
+        const city = await City.findByPk(req.cityId);
+
+        if (city) {
+            return res.json(city);
+        }
+
+        return res.json({ status: 'error', message: 'City not found' });
+
+    },
+
     async citiesByCountry(req, res) {
         const { country_id } = req.body;
         const country = await Country.findByPk(country_id, {
